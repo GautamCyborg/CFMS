@@ -9,6 +9,9 @@ const VerifyComponent = () => {
   const mapContainerRef = useRef(null);
   const [geoJsonData, setGeoJsonData] = useState('');
   const [selectedLayer, setSelectedLayer] = useState(null);
+  const [fillColor, setFillColor] = useState('#FFEDA0');
+const [borderColor, setBorderColor] = useState('#000000');
+
 
   useEffect(() => {
     // Initialize the map only once
@@ -90,14 +93,15 @@ const VerifyComponent = () => {
       : '#FFEDA0';
   };
 
-  const changeLayerColor = (color) => {
+  const changeLayerColor = (fillColor, borderColor) => {
     if (selectedLayer) {
       selectedLayer.setStyle({
-        fillColor: color,
-        color: color,
+        fillColor: fillColor,
+        color: borderColor,
       });
     }
   };
+  
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -134,13 +138,28 @@ const VerifyComponent = () => {
           />
         </label>
         <div className="w-full mt-5">
-          <label className="block mb-2 font-bold text-gray-800">Select New Color:</label>
-          <input
-            type="color"
-            onChange={(e) => changeLayerColor(e.target.value)}
-            className="w-full h-10 p-2 mb-5 border-2 border-gray-300 rounded-lg cursor-pointer"
-          />
-        </div>
+  <label className="block mb-2 font-bold text-gray-800">Select Fill Color:</label>
+  <input
+    type="color"
+    onChange={(e) => {
+      setFillColor(e.target.value);
+      changeLayerColor(e.target.value, borderColor);
+    }}
+    className="w-full h-10 p-2 mb-5 border-2 border-gray-300 rounded-lg cursor-pointer"
+  />
+</div>
+<div className="w-full mt-5">
+  <label className="block mb-2 font-bold text-gray-800">Select Border Color:</label>
+  <input
+    type="color"
+    onChange={(e) => {
+      setBorderColor(e.target.value);
+      changeLayerColor(fillColor, e.target.value);
+    }}
+    className="w-full h-10 p-2 mb-5 border-2 border-gray-300 rounded-lg cursor-pointer"
+  />
+</div>
+
       </div>
     </div>
   );

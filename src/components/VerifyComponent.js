@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { FaFileUpload } from 'react-icons/fa';
-import icon from "../assets/Mark05.png"; // Adjust the path to your custom icon
+import icon from "../assets/Mark05.png"; 
 
 const VerifyComponent = () => {
   const mapRef = useRef(null);
